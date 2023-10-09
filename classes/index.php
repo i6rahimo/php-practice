@@ -1,87 +1,205 @@
 <?php 
 
-class SimpleClass 
+// class SimpleClass 
+// {
+//     public $var = 'значение по умолчанию';
+
+
+//     public function displayVar() {
+//         echo $this->var;
+//     }
+// }
+
+
+// $err = new SimpleClass();
+// // $err->displayVar();
+
+
+
+// class User 
+// {
+//     public int $id;
+//     public ?string $name;
+
+//     public function __construct(int $id, ?string $name)
+//     {
+//         $this->id = $id;
+//         $this->name = $name;
+//     }
+// }
+
+// $user = new User(123, "qwee");
+
+// // var_dump($user->id);
+// // var_dump($user->name);
+
+
+// class Shape 
+// {
+//     public int $numberOfSides;
+//     public string $name;
+
+//     public function setNumberOfSides(int $numberOfSides): void 
+//     {
+//         $this->numberOfSides = $numberOfSides;
+//     }
+//     public function setName(string $name): void 
+//     {
+//         $this->name = $name;
+//     }
+//     public function getNumberOfSides(): int
+//     {
+//         return $this->numbrtOfSides;
+//     }
+//     public function getName(): string 
+//     {
+//         return $this->name;
+//     }
+// }
+
+// $circle = new Shape();
+// $circle->setName('circle');
+// echo $circle->getName();
+// echo $circle->getNumberOfSides();
+// echo $circle->getNumberOfSides();
+
+
+// $triangle = new Shape();
+// $triangle->setName('triangle');
+// $triangle->setNumberOfSides(3);
+// var_dump($triangle->getName());
+// var_dump($triangle->getNumberOfSides());
+
+
+// class Test 
+// {
+//     public readonly string $prop;
+//     public function __construct(string $prop) {
+//         $this->prop = $prop;
+//     }
+// }
+
+// $test = new Test('foobar');
+// var_dump($test->prop);
+
+
+// КОНСТАНТЫ 
+
+
+class MyClass 
 {
-    public $var = 'значение по умолчанию';
+    const CONSTANT = 'значение константы';
 
-
-    public function displayVar() {
-        echo $this->var;
+    function showConstant() {
+        echo self::CONSTANT . "\n";
     }
 }
 
 
-$err = new SimpleClass();
-// $err->displayVar();
+// echo MyClass::CONSTANT . "\n";
+
+$classname = 'MyClass';
+// echo $classname::CONSTANT . "\n";
+
+$class = new MyClass();
 
 
+const ONE = 1;
 
-class User 
-{
-    public int $id;
-    public ?string $name;
+class foo {
+    const TWO = ONE * 2;
+    const THREE = ONE + self::TWO;
+    const SENTENCE = 'Значение константы THREE - ' . self::THREE;
 
-    public function __construct(int $id, ?string $name)
-    {
-        $this->id = $id;
-        $this->name = $name;
+    function showSentence() {
+        echo TWO;
     }
 }
 
-$user = new User(123, "qwee");
+// class Foo {
+//     public const BAR = 'bar';
+//     public const BAZ = 'baz';
+// }
 
-// var_dump($user->id);
-// var_dump($user->name);
+// echo Foo::BAR; PHP_EOL;
 
 
-class Shape 
-{
-    public int $numberOfSides;
-    public string $name;
 
-    public function setNumberOfSides(int $numberOfSides): void 
-    {
-        $this->numberOfSides = $numberOfSides;
-    }
-    public function setName(string $name): void 
-    {
-        $this->name = $name;
-    }
-    public function getNumberOfSides(): int
-    {
-        return $this->numbrtOfSides;
-    }
-    public function getName(): string 
-    {
-        return $this->name;
+// Конструктор
+
+class BaseClass {
+    function __construct() {
+        print "Конструктор класса BaseClass \n";
     }
 }
 
-$circle = new Shape();
-$circle->setName('circle');
-echo $circle->getName();
-echo $circle->getNumberOfSides();
-echo $circle->getNumberOfSides();
-
-
-$triangle = new Shape();
-$triangle->setName('triangle');
-$triangle->setNumberOfSides(3);
-var_dump($triangle->getName());
-var_dump($triangle->getNumberOfSides());
-
-
-class Test 
-{
-    public readonly string $prop;
-    public function __construct(string $prop) {
-        $this->prop = $prop;
+class SubClass extends BaseClass {
+    function __construct() {
+        parent::__construct();
+        print "Конструктор класса SubClass \n";
     }
 }
 
-$test = new Test('foobar');
-var_dump($test->prop);
+class OtherSubClass extends BaseClass {
 
+}
+
+// $obj = new BaseClass();
+// $subOvj = new SubClass();
+
+// Пример #2 Использование аргументов в конструкторах
+
+
+class Point {
+    protected int $x;
+    protected int $y;
+
+    public function __construct(int $x, int $y) {
+        $this->x = $x;
+        $this->y = $y;
+        echo $this->y + $this->x;
+    }
+}
+
+
+$p1 = new Point(4, 5);
+// $p2 = new Point(2,4);
+// $p3 = new Point(y: 10, x: 22);
+
+var_dump($p1);
+var_dump($p2);
+var_dump($p3);
+
+// Пример выше можно будет переписать следующим образом: 
+
+class PointTwo {
+    public function __construct(protected int $x, protected int $y = 0) {
+
+    }
+}
+
+
+// Пример #4 Пример использования new в инициализации класса
+
+static $x = new Foo;
+const C = new Foo;
+
+function test($param = new Foo) {
+
+}
+
+
+class Test {
+    public function __construct(
+        public $prop = new Foo,
+    ) {}
+}
+// function test(
+//     $a = new (CLASS_NAME_CONSTANT)(),
+//     $b = new class{},
+//     $c = new A(...[]),
+//     $d = new B($abc),
+// ){}
 
 ?>
 
