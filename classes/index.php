@@ -166,9 +166,9 @@ $p1 = new Point(4, 5);
 // $p2 = new Point(2,4);
 // $p3 = new Point(y: 10, x: 22);
 
-var_dump($p1);
-var_dump($p2);
-var_dump($p3);
+// var_dump($p1);
+// var_dump($p2);
+// var_dump($p3);
 
 // Пример выше можно будет переписать следующим образом: 
 
@@ -200,6 +200,38 @@ class Test {
 //     $c = new A(...[]),
 //     $d = new B($abc),
 // ){}
+
+
+class Foo1 {
+    public $a = "foobarstring";
+    public $b;
+    public $c = ['some', 'values'];
+}
+
+for ($i = 0; $i < 1; $i++) {
+    $m = memory_get_usage();
+    ${'var' . $i} = new Foo;
+    echo memory_get_usage() - $m . "\n";
+}
+
+//  Область видимости
+
+class MyClass1 {
+    public $public = 'Public';
+    protected $protected = 'Protected';
+    private $private = 'Private';
+
+    function printHello() {
+        echo $this->public;
+        echo $this->protected;
+        echo $this->private;
+
+    }
+}
+
+$obj = new MyClass1();
+
+
 
 ?>
 
