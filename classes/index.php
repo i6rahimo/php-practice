@@ -202,17 +202,17 @@ class Test {
 // ){}
 
 
-class Foo1 {
-    public $a = "foobarstring";
-    public $b;
-    public $c = ['some', 'values'];
-}
+// class Foo1 {
+//     public $a = "foobarstring";
+//     public $b;
+//     public $c = ['some', 'values'];
+// }
 
-for ($i = 0; $i < 1; $i++) {
-    $m = memory_get_usage();
-    ${'var' . $i} = new Foo;
-    echo memory_get_usage() - $m . "\n";
-}
+// for ($i = 0; $i < 1; $i++) {
+//     $m = memory_get_usage();
+//     ${'var' . $i} = new Foo;
+//     echo memory_get_usage() - $m . "\n";
+// }
 
 //  Область видимости
 
@@ -221,7 +221,7 @@ class MyClass1 {
     protected $protected = 'Protected';
     private $private = 'Private';
 
-    function printHello() {
+    public function printHello() {
         echo $this->public;
         echo $this->protected;
         echo $this->private;
@@ -230,8 +230,70 @@ class MyClass1 {
 }
 
 $obj = new MyClass1();
+// echo $obj->public;
+// echo $obj->protected;
+// echo $obj->private;
+// $obj->printHello();
 
 
+class MyClass2 extends MyClass1 
+{
+    public $public = 'Public2';
+    protected $protected = 'Protected2';
+
+    function printHello() 
+    {
+        echo $this->public;
+        echo $this->protected;
+        echo $this->private;
+
+    }
+}
+
+class Test1 {
+    private $foo;
+
+    public function __construct($foo) {
+        $this->foo = $foo;
+    }
+
+    private function bar() {
+        echo 'Доступ к закрытому методу.';
+    }
+    public function baz(Test1 $other) {
+        echo $other->foo;
+        $other->foo = 'hello';
+        // var_dump($other->foo);
+
+        // $other->bar();
+    }
+}
+
+
+// $test = new Test1('test');
+
+// $test->baz(new Test1('other'));
+// $test->baz();
+function takes_array($input)
+{
+    echo "$input[0] + $input[1] = ", $input[0]+$input[1];
+}
+
+
+$makefoo = true;
+
+bar();
+
+if($makefoo) {
+    function foo() {
+        echo 'Я не существую', func_num_args(), PHP_EOL;
+    }
+}
+
+if($makefoo) foo(1, 2);
+function bar() {
+    echo 'Я существую', PHP_EOL;
+}
 
 ?>
 
