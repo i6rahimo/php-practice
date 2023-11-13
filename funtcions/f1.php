@@ -127,11 +127,11 @@ function bar($arg = '') {
 function echoit($string) {
     echo $string;
 }
-$func = 'foo';
-$func();
+// $func = 'foo';
+// $func();
 
-$func = 'bar';
-$func('test');
+// $func = 'bar';
+// $func('test');
 
 // Пример #2 Обращение к методам класса посредством переменных
 
@@ -145,9 +145,9 @@ class Foo {
     }
 }
 
-$foo = new Foo();
-$funcname = "Variable";
-$foo->$funcname();
+// $foo = new Foo();
+// $funcname = "Variable";
+// $foo->$funcname();
 
 // Пример #3 Пример вызова переменного метода со статическим свойством
 
@@ -157,9 +157,9 @@ class FooTwo {
         echo 'Call method Variable' . "<br/>";
     }
 }
-echo FooTwo::$variable;
-$variable = "Variable";
-FooTwo::$variable();
+// echo FooTwo::$variable;
+// $variable = "Variable";
+// FooTwo::$variable();
 
 // Пример #4 Сложные callable-функции
 
@@ -173,9 +173,30 @@ class FooThree {
     }
 }
 
-$foofunc = array('FooThree', 'bar');
-var_dump($foofunc);
+// $foofunc = array('FooThree', 'bar');
+// var_dump($foofunc);
 // $foofunc();
-$foofunc = array()
+// $foofunc// = array();
+
+
+
+// $y  = 1;
+
+// $fn1 = fn($x) => $x + $y;
+
+// $fn2 = function($x) use($y) {
+//     return $x + $y;
+// };
+
+
+// var_export($fn2(13));
+
+
+$users = [['id' => 1, 'name' => 'Alex'], ['id' => 2, 'name' => 'Billy']];
+
+$ids = array_map(function($user) {
+    return $user['id'];
+}, $users);
+var_dump($ids);
 
 ?>
