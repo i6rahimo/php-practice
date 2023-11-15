@@ -243,57 +243,91 @@ class MyClass2 extends MyClass1
 
     function printHello() 
     {
-        echo $this->public;
-        echo $this->protected;
-        echo $this->private;
+        // echo $this->public;
+        // echo $this->protected;
+        // echo $this->private;
 
     }
 }
 
-class Test1 {
-    private $foo;
+// class Test1 {
+//     private $foo;
 
-    public function __construct($foo) {
-        $this->foo = $foo;
-    }
+//     public function __construct($foo) {
+//         $this->foo = $foo;
+//     }
 
-    private function bar() {
-        echo 'Доступ к закрытому методу.';
-    }
-    public function baz(Test1 $other) {
-        echo $other->foo;
-        $other->foo = 'hello';
-        // var_dump($other->foo);
+//     private function bar() {
+//         echo 'Доступ к закрытому методу.';
+//     }
+//     public function baz(Test1 $other) {
+//         echo $other->foo;
+//         $other->foo = 'hello';
+//         // var_dump($other->foo);
 
-        // $other->bar();
-    }
-}
+//         // $other->bar();
+//     }
+// }
 
 
 // $test = new Test1('test');
 
 // $test->baz(new Test1('other'));
-// $test->baz();
-function takes_array($input)
+// // $test->baz();
+// function takes_array($input)
+// {
+//     // echo "$input[0] + $input[1] = ", $input[0]+$input[1];
+// }
+
+
+// $makefoo = true;
+
+// bar();
+
+// if($makefoo) {
+//     function foo() {
+//         // echo 'Я не существую', func_num_args(), PHP_EOL;
+//     }
+// }
+
+// if($makefoo) foo(1, 2);
+// function bar() {
+//     // echo 'Я существую';
+// }
+
+
+
+
+
+function testReturn(): ?string
 {
-    echo "$input[0] + $input[1] = ", $input[0]+$input[1];
+    return 'elePhant';
 }
 
 
-$makefoo = true;
 
-bar();
+class TestClass
+{
+    const CONSTANT = 'значение константы';
 
-if($makefoo) {
-    function foo() {
-        echo 'Я не существую', func_num_args(), PHP_EOL;
+    function showConstant() {
+        echo self::CONSTANT . "\n";
     }
+
 }
 
-if($makefoo) foo(1, 2);
-function bar() {
-    echo 'Я существую', PHP_EOL;
-}
+
+echo TestClass::CONSTANT ."\n";
+
+
+$classname = "TestClass";
+echo $classname::CONSTANT . "\n";
+
+$class = new TestClass();
+$class->showConstant();
+
+echo $class::CONSTANT ."\n";
+
 
 ?>
 
