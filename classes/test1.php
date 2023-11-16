@@ -210,38 +210,95 @@ class Point
 
 // Пример #5 Использование статических методов для создания объектов
 
-class Product 
+// class Product 
+// {
+//     private ?int $id;
+//     private ?string $name;
+
+//     private function __constaruct(?int $id = null, ?string $name = null) 
+//     {
+//         $this->id = $id;
+//         $this->name = $name;
+//     }
+
+//     public static function fromBasicData(int $id, string $name): static
+//     {
+//         $new = new static($id, $name);
+//         return $new;
+//     }
+
+//     public static function fromJson(string $json): static
+//     {
+//         $data = json_decode($json);
+//         return new static ($data['id'], $data['name']);
+//     }
+
+//     public static function fromXml(string $sml): static 
+//     {
+//         $data = convert_xml_to_array($xml);
+//         $new = new static();
+//         $new->id = $data['id'];
+//         $new->name = $data['name'];
+//         return $new;
+//     }
+// }
+
+
+// $p1 = Product::fromBasicData(5, 'Widget');
+
+
+
+class MyDestructorCLass 
 {
-    private ?int $id;
-    private ?string $name;
-
-    private function __constaruct(?int $id = null, ?string $name = null) 
+    function __construct()
     {
-        $this->id = $id;
-        $this->name = $name;
+        print "Constructor \n";
     }
-
-    public static function fromBasicData(int $id, string $name): static
+    function __destruct()
     {
-        $new = new static($id, $name);
-        return $new;
-    }
-
-    public static function fromJson(string $json): static
-    {
-        $data = json_decode($json);
-        return new static ($data['id'], $data['name']);
-    }
-
-    public static function fromXml(string $sml): static 
-    {
-        $data = convert_xml_to_array($xml);
-        $new = new static();
-        $new->id = $data['id'];
-        $new->name = $data['name'];
-        return $new;
+        print "Destroy " . __CLASS__ . "\n";
     }
 }
 
+// $obj = new MyDestructorCLass();
 
-$p1 = Product::fromBasicData(5, 'Widget');
+class MyClass 
+{
+    const CONST_VALUE = 'Inner constant' . "\n";
+}
+
+class OtherClass1 extends MyClass
+{   
+    public static $my_static = "Static inner \n";
+
+    public static function doubleColon() {
+        echo parent::CONST_VALUE . "\n";
+        echo self::$my_static . "\n";
+    }
+}   
+
+// $className = 'OtherClass1';
+// $className::doubleColon();
+
+
+class Foo 
+{
+    public static $my_static = "foo";
+    public static function aStaticMethod() {
+        return self::$my_static;
+    }
+}
+
+class Bar extends Foo 
+{
+    public function fooStatic() {
+        return parent::$my_static;
+    }
+}
+
+print Bar::$my_static . "\n";
+
+
+$foo = new Foo();
+
+print $foo->aStaticMethod() . "\n";
