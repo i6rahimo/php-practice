@@ -296,9 +296,171 @@ class Bar extends Foo
     }
 }
 
-print Bar::$my_static . "\n";
+// print Bar::$my_static . "\n";
 
 
-$foo = new Foo();
+// $foo = new Foo();
 
-print $foo->aStaticMethod() . "\n";
+// print $foo->aStaticMethod() . "\n";
+
+
+interface Spotsmen 
+{
+    public function run();
+    public function gym();
+    public function eat();
+}
+
+class Gymnast implements Spotsmen
+{   
+    public function run() {
+        echo "I'm running \n";
+    }
+    public function gym()  {
+        echo "I'm gym \n";
+
+    }
+        
+    public function eat() {
+        echo "I'm eating \n";
+
+    }
+    
+} 
+
+
+class Name 
+{
+    public function prepare(string $name): string 
+    {
+        return ucfirst(trim($name));
+    }
+}
+
+// $ex = new Name();
+// echo $ex->prepare("I6rahim rer e e e ");
+
+// class Loger 
+// {
+//     public function log($img) {
+//         echo $img;
+//     }
+// }
+
+// // $uil->setLogger(new Loger());
+// $util->setLogger(new class {
+//     public function log($img) {
+//         echo $img;
+//     }
+// });
+
+
+class Outer
+{
+    private $prop = 1;
+    protected $prop2 = 2;
+
+
+    protected function func1() 
+    {
+        return 3;
+    }
+
+    public function func2()
+    {
+        return new class($this->prop) extends Outer {
+            private $prop3;
+
+            public function __construct($prop) 
+            {
+                $this->prop3 = $prop;
+            }
+            public function func3() 
+            {
+                return $this->prop2 + $this->prop3 + $this->func1();
+            }
+        };
+    }
+}
+
+// echo (new Outer)->func2()->func3();
+
+// $var = "Hello world \n";
+// $func = function () use (& $var) {$var =$var . "we are visiting";};
+// $func();
+// echo $var;
+
+
+
+class MyClass1 
+{
+    public $var1 = 'property 1';
+    public $var2 = 'property 2';
+    public $var3 = 'property 3';
+
+    protected $protected = 'Protected variable';
+    private $private = 'Private variable';
+
+    function iterateVisible() {
+        // echo "MyClass1::iterateVisible:\n";
+        foreach ($this as $key) {
+            // print "$key => $value \n";
+            // print "$value\n";
+            // echo $key . $this . "\n";
+        }
+    }
+}
+
+// $class = new MyClass1();
+// $class->iterateVisible();
+
+class Tweet extends Enity 
+{
+    protected $id;
+    protected $text;
+    public function __construct($id, $text, array $meta)
+    {
+        $this->id = $id;
+        $this->text = $text;
+        parent::__construct($meta);
+    }
+}
+
+class Enity 
+{
+    protected $meta;
+    public function __construct(array $meta)
+    {
+        $this->meta = $meta;
+    }
+}
+
+final class Product
+{
+    public function __construct(
+        private string $name,
+        private float $pricem,
+        private string $currency,
+    ){}
+}
+
+final class Subscription 
+{
+    public function __construct(
+        private string $name,
+        private float $price,
+        private string $currency,
+    ){}
+}
+
+final readonly class Money 
+{
+    private float $amount;
+    private string $currency;
+    public function __construct(float $amount, string $currency)
+    {
+        $this->ensureAmountIsPositive($amount);
+        $this->amount = $amount;
+        $this->currency = $currency;
+    }
+}
