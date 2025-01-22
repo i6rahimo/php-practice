@@ -453,7 +453,7 @@ final class Subscription
     ){}
 }
 
-final readonly class Money 
+class Money 
 {
     private float $amount;
     private string $currency;
